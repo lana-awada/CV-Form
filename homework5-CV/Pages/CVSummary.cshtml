@@ -1,0 +1,26 @@
+﻿@page "{Randomnumber}/{id}"
+@model homework5_CV.Pages.CVSummaryModel
+@{
+}<center>
+    <h1>Your CV</h1>
+</center>
+
+    <div class="cv-output">
+    <h3>CV with id : @Model.CV.Id</h3>
+    <br />
+    <p><strong>Name: </strong>@Model.CV.Fname @Model.CV.Lname </p>
+    <p><strong>Birthday: </strong>@Model.CV.BDay</p>
+    <p><strong>Nationality: </strong>@Model.CV.Nationality</p>
+    <p><strong>Sex: </strong>@Model.CV.Sex</p>
+    <p><strong>Skills:</strong> </p>
+        @foreach (var skill in Model.CV.Skills)
+        {
+            <p>@skill</p> 
+
+        }
+
+    <p><strong>Email: </strong>@Model.CV.Email</p>
+    <img src="@Model.CV.Imageurl" alt="CV Image" />
+    <p> The generated random number = @Model.Randomnumber</p>
+
+

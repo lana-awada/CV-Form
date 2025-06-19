@@ -1,0 +1,100 @@
+﻿@page 
+@model homework5_CV.Pages.AllCvModel
+@{
+}
+<center><h1>All CVs'</h1></center>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>BirthDay</th>
+            <th>Nationality</th>
+            <th>Sex</th>
+            <th>Skills</th>
+        </tr>
+    </thead>
+<tbody>
+    @foreach (var cv in Model.CVList)
+    {
+        @await Html.PartialAsync("_CvSummary", cv)
+    }
+</tbody>
+</table>
+
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>BirthDay</th>
+            <th>Nationality</th>
+            <th>Sex</th>
+            <th>Skills</th>
+        </tr>
+     </thead>
+     <tbody>
+        @foreach (var cv in Model.CVList)
+        {
+            <tr>
+                <td><p>@cv.Id</p></td>
+                <td><p>@cv.Fname</p></td>
+
+                <td><p>@cv.Lname</p></td>
+                <td><p>@cv.Email</p></td>
+                <td><p>@cv.BDay</p></td>
+                <td><p>@cv.Nationality</p></td>
+                <td><p>@cv.Sex</p></td>
+
+                                    <td>
+                                         @foreach (var skill in @cv.Skills)
+                                        {
+                                        @skill<span>,</span>
+                                        }
+                                   </td>
+@*                 <td><p>@string.Join(", ", cv.Skills)</p></td>
+ *@                <td>
+                        @*<a asp-page="/CVPage" asp-route-id="@cv.Id" class="btn btn-primary">Edit</a> hyde eza bade e5eda aa CVPage
+ *@                    @* asp-page="/CVPage" tells Razor to redirect to that Razor Page.
+                    asp-route-id="@cv.Id" passes the CV's ID as a route parameter so it can be loaded for editing.
+
+                Reason:	                                        Explanation:
+                 GET is appropriate	                            Viewing/editing a form should use GET
+                 Simple & clear	                                Using <a href> is cleaner than a form
+                 Redirects to a form page	                    You can use a separate Razor Page (EditCv.cshtml) to edit the record
+                 Good UX	                                    Users expect a new page with a form when editing*@
+
+                    <a class="btn btn-primary" href="/EditCv?id=@cv.Id">Edit</a>
+
+                </td>
+
+                <td>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@cv.Id" onsubmit="return confirm('Are you sure you want to delete this CV?');">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+         @*                Feature	:                          Recommendation:
+                            Delete action	                      Use <form method="post">with handler
+                            Security	                          Use POST, never GET for deletes
+                            User confirmation	                  Add onsubmit="return confirm(...)"
+                            Button design	                      Use Bootstrap's btn btn-danger for red delete button *@
+                    </form>
+                </td>   
+
+            </tr>
+
+        }
+     </tbody>
+     </table>
+
+
+            
+

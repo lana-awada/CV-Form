@@ -1,0 +1,117 @@
+﻿@page 
+@model homework5_CV.Pages.CVpageModel
+@{
+
+    Random random = new Random();
+    int dynamicNum = random.Next(1, 100);
+
+}
+<center><h1>CV Form</h1></center>
+
+<form method="post" asp-page-handler="Info" asp-route-Randomnumber="@dynamicNum" enctype="multipart/form-data">@* You need to add enctype="multipart/form-data" to your <form> when you're uploading files (like images)*@
+
+    <div asp-validation-summary="All" class="text-danger"></div>@* hyde kermel ytaleaale error tabaa l ModelState.AddModelError
+ *@
+    @* asp-route-randomNum="@dynamicNum" hyda byotlaa bl route parameter yaane /CVPage/15 *@
+@*     asp-page-handler="Info" bkoun esma bl onpostInfo hek 
+ *@    @* asp-route="3"  eza bade ebaat route parameter*@  @* asp-page="otherpage"  eza bade rou7 aa page esma otherpage eza fe method post yaane bs yaamel submit*@
+    <div class="form-group">
+        <h4><label asp-for="cvViewModel.Fname"></label></h4>
+        <input asp-for="cvViewModel.Fname"  class="form-control" name="Fname" />
+        <span asp-validation-for="cvViewModel.Fname" data-valmsg-for="Fname"></span>
+    </div>
+    <br/>
+
+    <div class="form-group">
+        <h4> <label asp-for="cvViewModel.Lname"></label></h4>
+        <input asp-for="cvViewModel.Lname" name="Lname" /> @* b7ot l name kermel ye2dar yaamel binding kermel eza l asme2 hene zetoun maa l viewmodel ma btzbat fa baamel overight   *@
+        <span asp-validation-for="cvViewModel.Lname" data-valmsg-for="Lname"></span> @* hon kmn kermel l validation baamel overight data-valmsg-for="LName" mtl esem l binding model *@
+    </div>
+    <br />
+
+    <div class="form-group">
+        <h4><label asp-for="cvViewModel.BDay"></label></h4>
+        <input asp-for="cvViewModel.BDay" name="BDay" />
+        <span asp-validation-for="cvViewModel.BDay" data-valmsg-for="BDay"></span>
+    </div>
+    <br />
+
+    <div class="form-group">
+        <h4>  <label asp-for="cvViewModel.Nationality"></label></h4>
+        <select asp-for="cvViewModel.Nationality" name="Nationality" asp-items="Model.nationalityItems" class="form-control">
+            <option value="">Select Nationality</option> 
+        </select>
+        <span asp-validation-for="cvViewModel.Nationality" data-valmsg-for="Nationality"></span>
+    </div>
+    <br />
+
+    <div class="form-group">
+        <h4> <label asp-for="cvViewModel.Sex"></label></h4>
+        <input type="radio" asp-for="cvViewModel.Sex" value="Male" name="Sex" /> Male
+        <input type="radio" asp-for="cvViewModel.Sex" value="Female" name="Sex" /> Female
+        <span asp-validation-for="cvViewModel.Sex" data-valmsg-for="Sex"></span>
+    </div>
+    <br />
+
+    <div class="form-group">
+        <h4>  <label asp-for="cvViewModel.Skills"></label></h4>
+        @foreach(var skill in new List<string> {"Java" , "Python", "Asp" })
+        {
+            <div>
+                <input type="checkbox" value="@skill" name="Skills" />@skill
+
+            </div>
+        }
+        <span asp-validation-for="cvViewModel.Skills" data-valmsg-for="Skills"></span>
+    </div>
+    <br />
+
+    <div class="form-group">
+        <h4><label asp-for="cvViewModel.Email"></label></h4>
+        <input asp-for="cvViewModel.Email" name="Email" />
+        <span asp-validation-for="cvViewModel.Email" data-valmsg-for="Email"></span>
+    </div>
+    <br />
+
+    <div class="form-group">
+        <h4><label asp-for="cvViewModel.EmailComfirmation"></label></h4>
+        <input asp-for="cvViewModel.EmailComfirmation" name="EmailComfirmation" />
+        <span asp-validation-for="cvViewModel.EmailComfirmation" data-valmsg-for="EmailComfirmation"></span>
+    </div>
+    <br />
+
+    <div class="form-group">
+        <h4><label asp-for="cvViewModel.Password"></label></h4>
+        <input asp-for="cvViewModel.Password" name="Password" />
+        <span asp-validation-for="cvViewModel.Password" data-valmsg-for="Password"></span>
+    </div>
+    <br />
+
+    <div class="form-group">
+        <h4> <label>Verification :</label></h4>
+        <input asp-for="cvViewModel.n1" name="n1" /> +
+        <input asp-for="cvViewModel.n2" name="n2" />=
+        <input asp-for="cvViewModel.sum" name="sum" />
+    </div>
+
+    <br />
+
+    <div class="form-group">
+        <h4> <label asp-for="cvViewModel.Image"></label></h4>
+        <input asp-for="cvViewModel.Image" name="Image" />
+        <span asp-validation-for="cvViewModel.Image" data-valmsg-for="Image"></span>
+    </div>
+    <br />
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+@section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+} 
+@* hyde kermel l client side validation yaane bale ma btzbat l data annotation
+ *@
+
+
