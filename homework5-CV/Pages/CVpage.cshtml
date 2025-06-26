@@ -15,6 +15,7 @@
     @* asp-route-randomNum="@dynamicNum" hyda byotlaa bl route parameter yaane /CVPage/15 *@
 @*     asp-page-handler="Info" bkoun esma bl onpostInfo hek 
  *@    @* asp-route="3"  eza bade ebaat route parameter*@  @* asp-page="otherpage"  eza bade rou7 aa page esma otherpage eza fe method post yaane bs yaamel submit*@
+   
     <div class="form-group">
         <h4><label asp-for="cvViewModel.Fname"></label></h4>
         <input asp-for="cvViewModel.Fname"  class="form-control" name="Fname" />
@@ -86,6 +87,14 @@
         <span asp-validation-for="cvViewModel.Password" data-valmsg-for="Password"></span>
     </div> *@
     <br />
+    <div class="form-group">
+        <h4><label asp-for="cvViewModel.Experience"></label></h4>
+        <textarea asp-for="cvViewModel.Experience" class="form-control" rows="4" placeholder="Write your experience here..." name="Experience"></textarea>
+        <span asp-validation-for="cvViewModel.Experience" class="text-danger"></span>
+    </div>
+
+    <br />
+
 
     <div class="form-group">
         <h4> <label>Verification :</label></h4>
@@ -97,13 +106,14 @@
     <br />
 
     <div class="form-group">
-        <h4> <label asp-for="cvViewModel.Image"></label></h4>
-        <input asp-for="cvViewModel.Image" name="Image" />
-        <span asp-validation-for="cvViewModel.Image" data-valmsg-for="Image"></span>
+        <h4> <label asp-for="cvViewModel.Pdf"></label></h4>
+        <input asp-for="cvViewModel.Pdf" name="Pdf" />
+        <span asp-validation-for="cvViewModel.Pdf" data-valmsg-for="Pdf"></span>
     </div>
     <br />
 
     <button type="submit" class="btn btn-primary">Submit</button>
+
 </form>
 
 
@@ -192,4 +202,43 @@
     .form-check {
         margin-bottom: 10px;
     }
+    /* Style for the form group */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        /* Label styling */
+        .form-group label {
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Textarea styling */
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            resize: vertical; /* Allow vertical resizing */
+            transition: border-color 0.3s;
+        }
+
+            /* On focus, add a soft highlight */
+            .form-group textarea:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+            }
+
+        /* Validation message styling */
+        .form-group span.text-danger {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: block;
+        }
+
 </style>

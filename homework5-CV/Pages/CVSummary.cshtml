@@ -12,6 +12,7 @@
     <p><strong>Birthday: </strong>@Model.CV.BDay</p>
     <p><strong>Nationality: </strong>@Model.CV.Nationality</p>
     <p><strong>Sex: </strong>@Model.CV.Sex</p>
+    <p><strong>Experience: </strong>@Model.CV.Experience</p>
     <p><strong>Skills:</strong> </p>
         @foreach (var skill in Model.CV.Skills)
         {
@@ -20,7 +21,14 @@
         }
 
     <p><strong>Email: </strong>@Model.CV.Email</p>
-    <img src="@Model.CV.Imageurl" alt="CV Image" />
+    @if (!string.IsNullOrEmpty(Model.CV.Pdf))
+    {
+        <p><strong>Download CV (PDF):</strong> <a href="@Model.CV.Pdf" target="_blank">Click here to view</a></p>
+    }
+    else
+    {
+        <p><strong>Download CV (PDF):</strong> Not available</p>
+    }
     <p> The generated random number = @Model.Randomnumber</p>
     <style>
         body {
@@ -64,6 +72,18 @@
 
         center {
             margin-bottom: 20px;
+            .cv-output a
+
+        {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .cv-output a:hover {
+            text-decoration: underline;
+        }
+
         }
     </style>
 

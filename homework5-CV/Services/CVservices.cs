@@ -31,7 +31,7 @@ namespace homework5_CV.Services
 
         public async Task<int> AddCv(BindingModel request)
         {
-            string url = await AddPhoto(request.Image);
+            string url = await AddPdf(request.Pdf);
             var cv = new DataModel()
             {
                 Fname = request.Fname,
@@ -40,9 +40,9 @@ namespace homework5_CV.Services
                 Sex = request.Sex,
                 Email = request.Email,
                 Nationality = request.Nationality,
-               // Password = request.Password,
+               Experience = request.Experience,
                 Skills = request.Skills,
-                url = url
+                Pdfurl = url
 
             };
              _context.CV.Add(cv);
@@ -52,6 +52,11 @@ namespace homework5_CV.Services
 
         public async Task<int> Adduser(BindingModelAddUser user)
         {
+            var exuser = _context.User.FirstOrDefault(x => x.Email == user.Email);
+            if(exuser != null)
+            {
+                return -1;
+            }
             var hasher = new PasswordHasher<DataModelUser>();
             var newuser = new DataModelUser()
             {
@@ -123,24 +128,42 @@ namespace homework5_CV.Services
 
 
 
-        private async Task<string> AddPhoto(IFormFile image)
+        /* private async Task<string> AddPhoto(IFormFile image)
+         {
+
+             // the addition of the guid is so that we don't have images with same name on the server
+             // a guid is a globally unique identifier
+             var guid = Guid.NewGuid();
+             var localFilePath = Path.Combine(_webHostEnvironment.ContentRootPath, "wwwroot", "images", $"{guid + image.FileName}");//i should create a folder wth name images in wwwroot fro saving the image
+             // Upload Image to local path
+             using var stream = new FileStream(localFilePath, FileMode.Create);
+             await image.CopyToAsync(stream);
+
+             // we want to access the image through something like this => http://localhost:1234/images/image.jpg
+             // with the written code, http://localhost:1234 would be swapped with whatever domain the server is hosted on,
+             // making it ready for production
+             var urlFilePath = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}" +
+                               $"{_httpContextAccessor.HttpContext.Request.PathBase}/images/{guid + image.FileName}";
+             return urlFilePath;
+         }*/
+
+        private async Task<string> AddPdf(IFormFile pdf)
         {
-
-            // the addition of the guid is so that we don't have images with same name on the server
-            // a guid is a globally unique identifier
             var guid = Guid.NewGuid();
-            var localFilePath = Path.Combine(_webHostEnvironment.ContentRootPath, "wwwroot", "images", $"{guid + image.FileName}");//i should create a folder wth name images in wwwroot fro saving the image
-            // Upload Image to local path
-            using var stream = new FileStream(localFilePath, FileMode.Create);
-            await image.CopyToAsync(stream);
+            var fileName = $"{guid}_{Path.GetFileName(pdf.FileName)}";
+            var localFilePath = Path.Combine(_webHostEnvironment.WebRootPath, "pdfs", fileName); // Save in wwwroot/pdfs
 
-            // we want to access the image through something like this => http://localhost:1234/images/image.jpg
-            // with the written code, http://localhost:1234 would be swapped with whatever domain the server is hosted on,
-            // making it ready for production
+            // Ensure folder exists
+            Directory.CreateDirectory(Path.GetDirectoryName(localFilePath));
+
+            using var stream = new FileStream(localFilePath, FileMode.Create);
+            await pdf.CopyToAsync(stream);
+
             var urlFilePath = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}" +
-                              $"{_httpContextAccessor.HttpContext.Request.PathBase}/images/{guid + image.FileName}";
+                              $"{_httpContextAccessor.HttpContext.Request.PathBase}/pdfs/{fileName}";
             return urlFilePath;
         }
+
 
 
     }

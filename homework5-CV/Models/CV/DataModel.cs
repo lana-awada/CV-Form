@@ -13,6 +13,7 @@ namespace homework5_CV.Models.CV
         public List<string> Skills { get; set; }
         public string Email { get; set; }
        // public string Password { get; set; }
-        public string url { get; set; }//staamalet string msh IFormeFile laeno eza aam sayev bl db ma fene estaamel l IFormeFile bsayev bs l url tabaa l soura
+       public string Experience {  get; set; }
+        public string Pdfurl { get; set; }//staamalet string msh IFormeFile laeno eza aam sayev bl db ma fene estaamel l IFormeFile bsayev bs l url tabaa l soura
     }
 }

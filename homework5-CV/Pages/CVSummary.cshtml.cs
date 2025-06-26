@@ -35,7 +35,8 @@ namespace homework5_CV.Pages
                 Sex = CVResult.Sex,
                 Email = CVResult.Email,
                 Skills = CVResult.Skills,
-                Imageurl = CVResult.url,
+                Experience = CVResult.Experience,
+                Pdf = CVResult.Pdfurl,
 
             };
             return Page();

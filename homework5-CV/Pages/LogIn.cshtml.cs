@@ -1,8 +1,12 @@
 using homework5_CV.Data;
 using homework5_CV.Models.User;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Claims;
+
 
 namespace homework5_CV.Pages
 {
@@ -28,39 +32,62 @@ namespace homework5_CV.Pages
         {
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-             if (Input.Email == "alisweidan1@gmail.com" && Input.Password == "12345")
-                        {
-                            return RedirectToPage("/AllCv");
 
-                        }
-            var user = _context.User.FirstOrDefault(u => u.Email == Input.Email );
+            if (Input.Email == "alisweidan1@gmail.com" && Input.Password == "12345")
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, Input.Email),
+                    new Claim(ClaimTypes.Role, "Admin")
+                };
 
-            if (user != null)
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                return RedirectToPage("/AllCv");
+            }
+            
+
+            var user = _context.User.FirstOrDefault(u => u.Email == Input.Email);
+
+            if (user != null && Input.Email != "alisweidan1@gmail.com")
             {
                 var hasher = new PasswordHasher<DataModelUser>();
                 var result = hasher.VerifyHashedPassword(user, user.Password, Input.Password);
 
                 if (result == PasswordVerificationResult.Success)
                 {
-                    return RedirectToPage("/CVpage", new { id = user.IdUser });
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, user.Email),
+                        new Claim(ClaimTypes.Role, user.Role ?? "User")
+                    };
+
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+                    if (user.Role == "Admin")
+                        return RedirectToPage("/AllCv");
+
+                    else if (user.Role == "User")
+                        return RedirectToPage("/CVpage", new { id = user.IdUser });
                 }
-
-
                 else
                 {
                     Message = "Invalid Password.";
                     return Page();
                 }
-                    
             }
 
-            // If user is not found
             Message = "User not found.";
             return Page();
         }

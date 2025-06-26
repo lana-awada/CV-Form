@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using homework5_CV.Data;
 
@@ -11,9 +12,11 @@ using homework5_CV.Data;
 namespace homework5_CV.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250626184604_m2")]
+    partial class m2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,10 +89,6 @@ namespace homework5_CV.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("IdUser");
 
                     b.ToTable("User");
@@ -99,8 +98,7 @@ namespace homework5_CV.Migrations
                         {
                             IdUser = 1,
                             Email = "alisweidan1@gmail.com",
-                            Password = "12345",
-                            Role = "Admin"
+                            Password = "12345"
                         });
                 });
 #pragma warning restore 612, 618

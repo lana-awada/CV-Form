@@ -1,12 +1,14 @@
 using homework5_CV.Models.CV;
 using homework5_CV.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace homework5_CV.Pages
 {
-    public class AllCvModel : PageModel
-    {
+    [Authorize(Roles = "Admin")]
+    public class AllCvModel : PageModel 
+    { 
         private readonly ICVservices cvservices;
         public AllCvModel(ICVservices services)
         {

@@ -39,11 +39,17 @@ namespace homework5_CV.Models.CV
         [Compare("Email", ErrorMessage = "The email and confirmation email do not match.")]
         [Display(Name = "Confirm Email: ")]
         public string EmailComfirmation { get; set; }
+        /*
+                [DataType(DataType.Password)]
+                [Display(Name = "Password: ")]
+                [MinLength(8)]
+                 public string Password { get; set; }*/
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Password: ")]
-        [MinLength(8)]
-       // public string Password { get; set; }
+
+        [Required]
+        [StringLength(200)]
+        [Display(Name = "Experience: ")]
+        public string Experience { get; set; }
 
         public int n1 { get; set; }
         public int n2 { get; set; }
@@ -52,7 +58,7 @@ namespace homework5_CV.Models.CV
 
         [Display(Name = "Photo: ")]
         [Required(ErrorMessage = "Photo is required.")]
-        public IFormFile Image { get; set; }
+        public IFormFile Pdf { get; set; }
 
 
 

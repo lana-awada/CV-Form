@@ -47,11 +47,17 @@ namespace homework5_CV.Models.CV
         [Display(Name = "Confirm Email: ")]
         public string EmailComfirmation { get; set; }
 
+        /*
+                [DataType(DataType.Password)]
+                [Display(Name = "Password: ")]
+                [MinLength(8)]
+                public string Password { get; set; }*/
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Password: ")]
-        [MinLength(8)]
-        //public string Password { get; set; }
+
+        [Required]
+        [StringLength(200)]
+        [Display(Name = "Experience: ")]
+        public string Experience { get; set; }
 
 
         public int n1 { get; set; }
@@ -59,9 +65,9 @@ namespace homework5_CV.Models.CV
         public int sum { get; set; }
 
 
-        [Display(Name = "Photo: ")]
+        [Display(Name = "Put Your CV here: ")]
         [Required(ErrorMessage = "Photo is required.")]
-        public IFormFile Image { get; set; }//staamalet IFromeFile laeno aam bebaat soura men form ama bl ViewModel2 heye mabaaoute 5alsa men hon fa baamela bs string 
+        public IFormFile Pdf { get; set; }//staamalet IFromeFile laeno aam bebaat soura men form ama bl ViewModel2 heye mabaaoute 5alsa men hon fa baamela bs string 
 
 
 

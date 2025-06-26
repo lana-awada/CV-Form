@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using homework5_CV.Models.CV;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace homework5_CV.Pages
 {
+    [Authorize(Roles = "User")]
     public class CVpageModel : PageModel
     {
         [BindProperty]

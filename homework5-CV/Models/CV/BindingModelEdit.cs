@@ -37,11 +37,16 @@ namespace homework5_CV.Models.CV
         [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
         public string Email { get; set; }
 
-/*
-        [DataType(DataType.Password)]
-        [Display(Name = "Password: ")]
-        [MinLength(8)]
-        public string Password { get; set; }*/
+        [Required]
+        [StringLength(200)]
+        [Display(Name = "Experience: ")]
+        public string Experience { get; set; }
+
+        /*
+                [DataType(DataType.Password)]
+                [Display(Name = "Password: ")]
+                [MinLength(8)]
+                public string Password { get; set; }*/
 
 
 

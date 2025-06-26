@@ -37,8 +37,16 @@ namespace homework5_CV.Pages
             {
                 return Page();
             }
+
             int id = await cvservices.Adduser(Input);
-            return RedirectToPage("/CVpage", new {id});
+            if(id == -1)
+            {
+                Message = "user with this email aleady exist.";
+                return Page();
+            }
+
+
+            return RedirectToPage("/LogIn", new {id});
 
         }
     }

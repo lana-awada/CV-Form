@@ -1,6 +1,8 @@
 using homework5_CV.Data;
 using homework5_CV.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 var connString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -14,7 +16,18 @@ builder.Services.AddScoped<ICVservices, CVservices>();// kenet 7atta hyde ma ken
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/LogIn";
+        options.AccessDeniedPath = "/AccessDenied"; // optional
+    });
+
+
 var app = builder.Build();
+
+app.UseAuthentication(); // before UseAuthorization
+app.UseAuthorization();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

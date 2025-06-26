@@ -41,6 +41,8 @@
             <th>Nationality</th>
             <th>Sex</th>
             <th>Skills</th>
+            <th>PDF CV</th>
+
         </tr>
      </thead>
      <tbody>
@@ -62,6 +64,19 @@
                                         @skill<span>,</span>
                                         }
                                    </td>
+
+                <td>
+                    @if (!string.IsNullOrEmpty(cv.Pdfurl))
+                    {
+                        <a href="@cv.Pdfurl" target="_blank" class="btn btn-secondary">View PDF</a>
+                    }
+                    else
+                    {
+                        <span>No PDF</span>
+                    }
+                </td>
+
+
 @*                 <td><p>@string.Join(", ", cv.Skills)</p></td>
  *@                <td>
                         @*<a asp-page="/CVPage" asp-route-id="@cv.Id" class="btn btn-primary">Edit</a> hyde eza bade e5eda aa CVPage
@@ -96,59 +111,71 @@
      </table>
 
 
-            <style>
+<style>
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(to right, #e0eafc, #cfdef3);
+        background: linear-gradient(135deg, #f0f2f5, #d9e4f5);
         margin: 0;
         padding: 40px;
     }
 
     h1 {
         text-align: center;
-        color: #333;
-        margin-bottom: 30px;
-        font-size: 32px;
+        color: #1a1a1a;
+        font-weight: 600;
+        margin-bottom: 40px;
+        font-size: 34px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
     }
 
     table.table {
-        width: 100%;
-        max-width: 1200px;
+        width: 95%;
         margin: 0 auto;
-        border-collapse: collapse;
-        background-color: white;
+        border-collapse: separate;
+        border-spacing: 0;
         border-radius: 12px;
+        background: rgba(255, 255, 255, 0.85);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
         overflow: hidden;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(4px);
     }
 
     thead {
-        background-color: #007bff;
+        background: rgba(0, 123, 255, 0.95);
         color: white;
     }
 
-    thead th {
-        padding: 15px;
-        text-align: center;
-        font-weight: bold;
-    }
+        thead th {
+            padding: 16px;
+            font-size: 15px;
+            text-align: center;
+            font-weight: 600;
+            border-right: 1px solid #0073e6;
+        }
+
+            thead th:last-child {
+                border-right: none;
+            }
 
     tbody td {
-        padding: 12px;
+        padding: 14px;
         text-align: center;
-        border-top: 1px solid #e0e0e0;
+        border-top: 1px solid #e2e8f0;
+        font-size: 14px;
+        color: #333;
     }
 
     tbody tr:hover {
-        background-color: #f1f9ff;
+        background-color: rgba(0, 123, 255, 0.05);
     }
 
     .btn {
-        padding: 6px 12px;
-        font-size: 14px;
+        padding: 7px 14px;
+        font-size: 13px;
         border-radius: 6px;
         text-decoration: none;
-        transition: background-color 0.3s ease;
+        transition: all 0.25s ease-in-out;
+        cursor: pointer;
     }
 
     .btn-primary {
@@ -157,9 +184,9 @@
         border: none;
     }
 
-    .btn-primary:hover {
-        background-color: #0056b3;
-    }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
 
     .btn-danger {
         background-color: #dc3545;
@@ -167,9 +194,19 @@
         border: none;
     }
 
-    .btn-danger:hover {
-        background-color: #a71d2a;
+        .btn-danger:hover {
+            background-color: #a71d2a;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        border: none;
     }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
 
     form {
         display: inline;
@@ -178,6 +215,10 @@
     td p {
         margin: 0;
     }
-</style>
 
+    span {
+        color: #999;
+        font-style: italic;
+    }
+</style>
 

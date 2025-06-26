@@ -20,7 +20,8 @@ namespace homework5_CV.Data
                 { 
                     IdUser=1,
                     Email="alisweidan1@gmail.com",
-                    Password="12345"
+                    Password="12345",
+                    Role="Admin"
                 }
     
                 );
