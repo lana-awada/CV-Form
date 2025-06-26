@@ -3,7 +3,7 @@ using System.IO;
 using System;
 
 
-namespace homework5_CV.Models
+namespace homework5_CV.Models.CV
 {
     public class ViewModel2
     {

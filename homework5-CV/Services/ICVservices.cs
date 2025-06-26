@@ -1,4 +1,5 @@
-﻿using homework5_CV.Models;
+﻿using homework5_CV.Models.CV;
+using homework5_CV.Models.User;
 
 namespace homework5_CV.Services
 {
@@ -9,8 +10,7 @@ namespace homework5_CV.Services
         public Task<DataModel> GetById(int Id);
         public Task<IResult> DeleteCv(int id);
         public Task UpdateCv(int Id,BindingModelEdit updatedCv);
-
-
+        public Task<int> Adduser(BindingModelAddUser user);
 
 
 

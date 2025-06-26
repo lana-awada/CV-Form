@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace homework5_CV.Models
+namespace homework5_CV.Models.CV
 {
     public class DataModel
     {
@@ -12,7 +12,7 @@ namespace homework5_CV.Models
         public string Sex { get; set; }
         public List<string> Skills { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+       // public string Password { get; set; }
         public string url { get; set; }//staamalet string msh IFormeFile laeno eza aam sayev bl db ma fene estaamel l IFormeFile bsayev bs l url tabaa l soura
     }
 }

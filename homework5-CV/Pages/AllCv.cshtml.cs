@@ -1,4 +1,4 @@
-using homework5_CV.Models;
+using homework5_CV.Models.CV;
 using homework5_CV.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

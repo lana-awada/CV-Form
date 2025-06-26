@@ -1,9 +1,9 @@
-using homework5_CV.Models;
+using homework5_CV.Models.CV;
 using homework5_CV.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-    
+
 namespace homework5_CV.Pages
 {
     public class CVSummaryModel : PageModel

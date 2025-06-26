@@ -1,24 +1,14 @@
-﻿@page
-@model IndexModel
+﻿
+@page
+@model homework5_CV.Pages.LogInModel
 @{
+
+    ViewData["Title"] = "Log In";
 }
 
-@* 
-<div class="text-center">
-    <h1 class="display-4">
-        Welcome to our CV application
-    </h1>
-    <a asp-page="/CVpage" class="btn btn-primary"> New CV</a>
-    <a asp-page="/AllCv" class="btn btn-primary"> All CVs</a>
-
-
-</div> *@
-
-
 <form method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <center><h1>Sign In</h1></center>
-
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <center><h1>Log In</h1></center>
 
     <div class="form-group">
         <label asp-for="viewModelAddUser.Email"></label>
@@ -32,15 +22,14 @@
         <span asp-validation-for="viewModelAddUser.Password" class="text-danger" data-valmsg-for="Password"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Sign In</button>
+    <button type="submit" class="btn btn-primary">Log In</button>
     <p>
-       <a asp-page="/LogIn">You have an account? </a>
+        <a asp-page="/Index">AlReady have an account? </a>
     </p>
-
 
     @if (!string.IsNullOrEmpty(Model.Message))
     {
-        <div class="alert alert-info mt-3">@Model.Message</div>
+        <div class="custom-error">@Model.Message</div>
     }
 </form>
 
@@ -127,4 +116,14 @@
     .text-danger {
         font-size: 14px;
     }
+
+    .custom-error {
+        color: #a94442;
+        background-color: #f2dede;
+        border: 1px solid #ebccd1;
+        padding: 10px;
+        border-radius: 4px;
+        margin-top: 10px;
+    }
+
 </style>

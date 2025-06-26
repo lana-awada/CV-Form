@@ -1,10 +1,12 @@
 ﻿using Azure.Core;
 using homework5_CV.Data;
-using homework5_CV.Models;
+using homework5_CV.Models.CV;
+using homework5_CV.Models.User;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace homework5_CV.Services
@@ -15,12 +17,16 @@ namespace homework5_CV.Services
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly PasswordHasher<DataModelUser> _hasher;
+
 
         public CVservices(AppDbContext context, IWebHostEnvironment webHostEnvironment, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
             _httpContextAccessor = httpContextAccessor;
+            _hasher = new PasswordHasher<DataModelUser>();
+
         }
 
         public async Task<int> AddCv(BindingModel request)
@@ -34,7 +40,7 @@ namespace homework5_CV.Services
                 Sex = request.Sex,
                 Email = request.Email,
                 Nationality = request.Nationality,
-                Password = request.Password,
+               // Password = request.Password,
                 Skills = request.Skills,
                 url = url
 
@@ -42,6 +48,21 @@ namespace homework5_CV.Services
              _context.CV.Add(cv);
              _context.SaveChanges();
             return cv.Id;
+        }
+
+        public async Task<int> Adduser(BindingModelAddUser user)
+        {
+            var hasher = new PasswordHasher<DataModelUser>();
+            var newuser = new DataModelUser()
+            {
+                
+                Email = user.Email,               
+
+            };
+            newuser.Password = _hasher.HashPassword(newuser, user.Password);
+            _context.User.Add(newuser);
+            _context.SaveChanges();
+            return newuser.IdUser;
         }
 
         public List<DataModel> GetCVs() //kermel shi zedo l dc eno naamel table list of cvs maa button edit w delete
@@ -93,7 +114,7 @@ namespace homework5_CV.Services
             datamodel.Nationality = updatedCv.Nationality;
             datamodel.Sex = updatedCv.Sex;
             datamodel.Skills = updatedCv.Skills;
-            datamodel.Password = updatedCv.Password;
+            //datamodel.Password = updatedCv.Password;
            // datamodel.url = updatedCv.Image.ToString();
 
 

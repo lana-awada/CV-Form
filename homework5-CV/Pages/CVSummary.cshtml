@@ -22,5 +22,49 @@
     <p><strong>Email: </strong>@Model.CV.Email</p>
     <img src="@Model.CV.Imageurl" alt="CV Image" />
     <p> The generated random number = @Model.Randomnumber</p>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1, h3 {
+            color: #2c3e50;
+        }
+
+        .cv-output {
+            background-color: #ffffff;
+            max-width: 700px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .cv-output p {
+                font-size: 16px;
+                color: #34495e;
+                margin: 8px 0;
+            }
+
+            .cv-output strong {
+                color: #2c3e50;
+            }
+
+            .cv-output img {
+                max-width: 100%;
+                height: auto;
+                margin-top: 15px;
+                border-radius: 10px;
+                border: 1px solid #ddd;
+                box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+            }
+
+        center {
+            margin-bottom: 20px;
+        }
+    </style>
 
 

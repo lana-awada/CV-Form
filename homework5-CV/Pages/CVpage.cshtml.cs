@@ -1,5 +1,4 @@
 using homework5_CV.Data;
-using homework5_CV.Models;
 using homework5_CV.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using homework5_CV.Models.CV;
 
 
 namespace homework5_CV.Pages
