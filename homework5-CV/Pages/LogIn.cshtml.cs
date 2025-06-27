@@ -39,7 +39,7 @@ namespace homework5_CV.Pages
                 return Page();
             }
 
-            if (Input.Email == "alisweidan1@gmail.com" && Input.Password == "12345")
+            if (Input.Email == "awadalana1@gmail.com" && Input.Password == "12345")
             {
                 var claims = new List<Claim>
                 {
@@ -57,7 +57,7 @@ namespace homework5_CV.Pages
 
             var user = _context.User.FirstOrDefault(u => u.Email == Input.Email);
 
-            if (user != null && Input.Email != "alisweidan1@gmail.com")
+            if (user != null && Input.Email != "awadalana1@gmail.com")
             {
                 var hasher = new PasswordHasher<DataModelUser>();
                 var result = hasher.VerifyHashedPassword(user, user.Password, Input.Password);

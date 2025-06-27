@@ -86,11 +86,19 @@
 
 
 
-    <input type="hidden" asp-for="CV.Pdfurl" />
-
+@*     <input type="hidden" asp-for="CV.Pdfurl" />
+ *@
 
 
     <input type="hidden" asp-for="CV.Id" name="id"/>
+@* 
+
+    <div class="form-group">
+        <label asp-for="CV.Pdfurl"></label>
+        <input asp-for="CV.Pdfurl" class="form-control" name="Pdf" />
+        <span asp-validation-for="CV.Pdfurl" class="text-danger" data-valmsg-for="Pdf"></span>
+    </div> *@
+
 
     <button type="submit" class="btn btn-success">Save</button>
     <a asp-page="/AllCv" class="btn btn-secondary">Cancel</a>

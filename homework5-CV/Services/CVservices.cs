@@ -120,7 +120,8 @@ namespace homework5_CV.Services
             datamodel.Sex = updatedCv.Sex;
             datamodel.Skills = updatedCv.Skills;
             //datamodel.Password = updatedCv.Password;
-           // datamodel.url = updatedCv.Image.ToString();
+            //datamodel.Pdfurl = updatedCv.Pdf.ToString();
+            datamodel.Experience= updatedCv.Experience;
 
 
             await _context.SaveChangesAsync();

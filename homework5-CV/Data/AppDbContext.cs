@@ -19,7 +19,7 @@ namespace homework5_CV.Data
                 new DataModelUser
                 { 
                     IdUser=1,
-                    Email="alisweidan1@gmail.com",
+                    Email="awadalana1@gmail.com",
                     Password="12345",
                     Role="Admin"
                 }
